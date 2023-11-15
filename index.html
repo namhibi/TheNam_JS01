@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip the Same Pairs Game</title>
+    <style>
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div id="gameBoard"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const symbols = ['🐶', '🐱', '🐭', '🐹', '🐰', '🐻', '🐼', '🐨'];
+        const cards = [...symbols, ...symbols];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        const gameBoard = document.getElementById('gameBoard');
+
+        // Shuffle the cards array
+        cards.sort(() => Math.random() - 0.5);
+
+        // Create and render cards on the game board
+        cards.forEach((symbol, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.index = index;
+            card.innerHTML = '<span class="hidden">' + symbol + '</span>';
+            card.addEventListener('click', flipCard);
+            gameBoard.appendChild(card);
+        });
+
+        // Function to flip a card
+        function flipCard() {
+            const selectedCard = this;
+
+            if (flippedCards.length < 2 && !selectedCard.classList.contains('flipped')) {
+                selectedCard.classList.add('flipped');
+                selectedCard.getElementsByTagName('hidden').style.visibility = 'visible';
+                flippedCards.push(selectedCard);
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        // Function to check if the flipped cards match
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const symbol1 = card1.innerText;
+            const symbol2 = card2.innerText;
+
+            if (symbol1 === symbol2) {
+                matchedPairs++;
+
+                if (matchedPairs === symbols.length) {
+                    alert('Congratulations! You matched all pairs.');
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card1.getElementsByTagName('hidden').style.visibility = 'hidden';
+                card2.classList.remove('flipped');
+                card2.getElementsByTagName('hidden').style.visibility = 'hidden';
+            }
+
+            flippedCards = [];
+        }
+    });
+</script>
+
+</body>
+</html>
