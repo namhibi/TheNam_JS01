@@ -7,7 +7,8 @@ function convertToRoman(numChar, one, five, ten) {
         case 4: return one + five;
         case 5: return five;
         case 6: return five + one;
-        case 7: return five + one + one + one;
+        case 7: return five + one + one;
+        case 8: return five + one + one + one;
         case 9: return one + ten;
     }
 }
@@ -29,6 +30,6 @@ function intToRoman(num) {
     }
     return result;
 }
-console.log(intToRoman(4));
-console.log(intToRoman(49));
+console.log(intToRoman(999));
+console.log(intToRoman(77));
 console.log(intToRoman(469));
