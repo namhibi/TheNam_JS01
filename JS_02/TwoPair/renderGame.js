@@ -33,7 +33,7 @@ let matchedPairs = 0;
 cards.sort(() => Math.random() - 0.5);
 let num = symbols.length * 2;
 let count = 1;
-cards.forEach((sym, index) => {
+cards.forEach((sym) => {
     const card = document.createElement('div');
     card.style.width = squareSize;
     card.style.height = squareSize;
@@ -61,7 +61,7 @@ cards.forEach((sym, index) => {
     indexText.style.fontWeight = 'bold';
 
     const symbol = document.createElement('div');
-    symbol.innerHTML = '<span class="hidden">' + sym + '</span>';
+    symbol.innerHTML = sym ;
     symbol.style.width = '100%';
     symbol.style.height = '100%';
     symbol.style.fontSize = '60px';
