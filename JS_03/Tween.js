@@ -51,7 +51,7 @@ export class Tween {
     distributeCards(object,posX,posY,delay){
         const duration = 1;
         gsap.to(object.image, {
-            x: posX,y:posY, duration, delay: delay,
+            x: posX,y:posY,yoyo:true,repeat: 0.75, duration, delay: delay,
         })
         gsap.to(object.image.elm, {
             rotation: 360, duration, delay: delay,
